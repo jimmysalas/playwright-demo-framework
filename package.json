@@ -1,0 +1,27 @@
+{
+  "name": "playwright-demo-framework",
+  "version": "1.0.0",
+  "description": "Playwright test automation framework demonstrating Page Object Model, custom fixtures, and API-first patterns",
+  "author": "James Salas",
+  "license": "MIT",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "test:chrome": "npx playwright test --project='Desktop Chrome'",
+    "test:firefox": "npx playwright test --project='Desktop Firefox'",
+    "test:mobile": "npx playwright test --project='Mobile Safari'",
+    "report": "npx playwright show-report",
+    "lint": "eslint 'src/**/*.ts' 'tests/**/*.ts'",
+    "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0",
+    "@faker-js/faker": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.5.0"
+  }
+}
