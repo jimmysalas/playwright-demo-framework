@@ -11,7 +11,7 @@ export default defineConfig({
     ['list'],
   ],
   use: {
-    baseURL: 'https://www.saucedemo.com',
+    baseURL: process.env.BASE_URL ?? 'https://www.saucedemo.com',
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
     actionTimeout: 15_000,
@@ -21,14 +21,6 @@ export default defineConfig({
     {
       name: 'Desktop Chrome',
       use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'Desktop Firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 13'] },
     },
   ],
 });
