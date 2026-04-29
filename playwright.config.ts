@@ -11,7 +11,7 @@ export default defineConfig({
     ['list'],
   ],
   use: {
-    baseURL: process.env.BASE_URL ?? 'https://www.saucedemo.com',
+    baseURL: process.env.BASE_URL ?? 'https://demo.playwright.dev/todomvc/#/',
     screenshot: 'only-on-failure',
     trace: 'on-first-retry',
     actionTimeout: 15_000,

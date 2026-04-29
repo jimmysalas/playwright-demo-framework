@@ -10,8 +10,8 @@
     "test:debug": "npx playwright test --debug",
     "test:chrome": "npx playwright test --project='Desktop Chrome'",
     "report": "npx playwright show-report",
-    "lint": "eslint 'src/**/*.ts' 'tests/**/*.ts'",
-    "format": "prettier --write 'src/**/*.ts' 'tests/**/*.ts'"
+    "lint": "eslint 'pages/**/*.ts' 'tests/**/*.ts'",
+    "format": "prettier --write 'pages/**/*.ts' 'tests/**/*.ts'"
   },
   "devDependencies": {
     "@faker-js/faker": "^10.4.0",

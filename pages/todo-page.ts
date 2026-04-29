@@ -10,7 +10,6 @@ export class TodoPage {
   readonly allFilter: Locator;
   readonly activeFilter: Locator;
   readonly completedFilter: Locator;
-  readonly markAllCompleteButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -22,7 +21,6 @@ export class TodoPage {
     this.allFilter = this.page.getByRole('link', { name: 'All' });
     this.activeFilter = this.page.getByRole('link', { name: 'Active' });
     this.completedFilter = this.page.getByRole('link', { name: 'Completed' });
-    this.markAllCompleteButton = this.page.getByText('Mark all as complete');
   }
 
   async generateTodoTitle(): Promise<string> {

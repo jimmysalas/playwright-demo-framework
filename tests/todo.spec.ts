@@ -46,7 +46,7 @@ test.describe('TodoMVC', () => {
   });
 
   test('Attempt to add an empty Todo', async () => {
-    // User presses Enter on a blank field, app should not create an empty todo item. Common edge case that can cause issues if not handled properly.
+    // Pressing Enter on an empty input should not create a todo item.
     const beforeCount = await todoPage.todoTitle.count();
     await todoPage.newTodoInput.press('Enter');
     await expect(todoPage.todoTitle).toHaveCount(beforeCount);
