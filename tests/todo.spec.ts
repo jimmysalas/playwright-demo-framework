@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { TodoPage } from '../src/pages/todo-page';
+import { TodoPage } from '../pages/todo-page';
 
 test.describe('TodoMVC', () => {
   let todoPage: TodoPage;
@@ -10,45 +10,45 @@ test.describe('TodoMVC', () => {
   });
 
   test('Add a new Todo item', async () => {
-    await todoPage.addTodo('New Todo Item');
-
-    await todoPage.expectTodoVisible('New Todo Item');
+    const todoTitle = await todoPage.generateTodoTitle();
+    await todoPage.addTodo(todoTitle);
+    await expect(todoPage.todoTitle.filter({ hasText: todoTitle })).toBeVisible();
   });
 
   test('Mark a Todo item as complete', async () => {
-    await todoPage.addTodo('Completed Todo Item');
-    await todoPage.markTodoComplete('Completed Todo Item');
-
-    await todoPage.expectTodoCompleted('Completed Todo Item');
+    const todoTitle = await todoPage.generateTodoTitle();
+    await todoPage.addTodo(todoTitle);
+    await todoPage.markTodoComplete(todoTitle);
+    await todoPage.filterBy('Completed');
+    await expect(todoPage.todoTitle.filter({ hasText: todoTitle })).toBeVisible();
   });
 
   test('Delete a Todo item', async () => {
-    await todoPage.addTodo('Delete Todo Item');
-    await todoPage.deleteTodo('Delete Todo Item');
-
-    await expect(todoPage.todoItems).toHaveCount(0);
-    await expect(todoPage.page.getByText('Delete Todo Item')).toBeHidden();
+    const todoTitle = await todoPage.generateTodoTitle();
+    await todoPage.addTodo(todoTitle);
+    await expect(todoPage.todoTitle.filter({ hasText: todoTitle })).toBeVisible();
+    await todoPage.deleteTodo(todoTitle);
+    await expect(todoPage.todoTitle.filter({ hasText: todoTitle })).toBeHidden();
   });
 
   test('Filter Todo items by Active and Completed', async () => {
-    await todoPage.addTodo('Active task');
-    await todoPage.addTodo('Completed task');
-    await todoPage.markTodoComplete('Completed task');
-
+    const activeTask = await todoPage.generateTodoTitle();
+    const completedTask = await todoPage.generateTodoTitle();
+    await todoPage.addTodo(activeTask);
+    await todoPage.addTodo(completedTask);
+    await todoPage.markTodoComplete(completedTask);
     await todoPage.filterBy('Active');
-    await expect(todoPage.page.getByText('Active task')).toBeVisible();
-    await expect(todoPage.page.getByText('Completed task')).toBeHidden();
-
+    await expect(todoPage.todoTitle.filter({ hasText: activeTask })).toBeVisible();
+    await expect(todoPage.todoTitle.filter({ hasText: completedTask })).toBeHidden();
     await todoPage.filterBy('Completed');
-    await expect(todoPage.page.getByText('Completed task')).toBeVisible();
-    await expect(todoPage.page.getByText('Active task')).toBeHidden();
+    await expect(todoPage.todoTitle.filter({ hasText: completedTask })).toBeVisible();
+    await expect(todoPage.todoTitle.filter({ hasText: activeTask })).toBeHidden();
   });
 
-  test('Attempt to add an empty Todo item', async () => {
-    // User should press Enter on a blank field.
-    // The app should not create empty todos.
+  test('Attempt to add an empty Todo', async () => {
+    // User presses Enter on a blank field, app should not create an empty todo item. Common edge case that can cause issues if not handled properly.
+    const beforeCount = await todoPage.todoTitle.count();
     await todoPage.newTodoInput.press('Enter');
-
-    await expect(todoPage.todoItems).toHaveCount(0);
+    await expect(todoPage.todoTitle).toHaveCount(beforeCount);
   });
 });
