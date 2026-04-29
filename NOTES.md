@@ -1,16 +1,28 @@
-# ncontracts-coding
+# ncontracts-coding-challenge
 
 A focused Playwright TodoMVC automation project using TypeScript.
 
 ## Write Up Answers
 
-- What would you add or improve if you had another hour? 
-If I had more time, I would add cleanup steps after each test ensuring that data doesn't build up over time, and cause the environment to become slow. Leftover data not being used in the environment takes up valuable resources. 
+- What would you add or improve if you had another hour?
+
+  If I had more time, I would add cleanup steps after each test ensuring that data doesn't build up over time, and cause the environment to become slow. Leftover data not being used in the environment takes up valuable resources.
+
 - How would you integrate this suite into a CI/CD pipeline?
-I would add tags to each test, that way I can control which tests I want to run in a nightly regression run vs. a smoke test for each pull request. I would then edit the circleci config file to define the different jobs with the corresponding tags.
+
+  I would add tags to each test, that way I can control which tests I want to run in a nightly regression run vs. a smoke test for each pull request. I would then edit the circleci config file to define the different jobs with the corresponding tags.
+
 - Is there anything about this app's behavior that surprised or concerned you from a quality standpoint?
-I was surprised there wasn't a button to add the todo item. Usually, there's a button for create actions. I was not expecting to only be able to press Enter to accomplish this.
-The stacked card design was also somewhat misleading, as it can give the impression that there are more todo items existing than are actually present.
+
+  I was surprised there wasn't a button to add the todo item. Usually, there's a button for create actions. I was not expecting to only be able to press Enter to accomplish this.
+
+  The stacked card design was also somewhat misleading, as it can give the impression that there are more todo items existing than are actually present.
+
+  There is no character limit for the todo input. While the app handled long entries gracefully without breaking, an unlimited input length is not ideal and could cause display issues.
+
+  It is difficult to tell at a glance which filter is currently selected. Having a stronger border around the text would help with this. 
+
+  The "Mark all as complete" button is somewhat ambiguous. It resembles a dropdown, so I had to click it to understand what it did, at which point all items were already marked as completed. A description or more obvious button design would improve the usability of that function.
 
 
 ## Architecture
